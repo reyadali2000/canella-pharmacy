@@ -35,6 +35,43 @@ export class ProductService {
     return cat ? this.i18n.tr(cat.name) : '';
   }
 
+  /**
+   * Smart bilingual search across product Arabic/English names, descriptions,
+   * category names, SKU, and size. Normalizes common Arabic character variants.
+   */
+  searchProducts(query: string, pool: Product[] = this.allProducts): Product[] {
+    const cleaned = this.normalize(query);
+    if (!cleaned) return pool;
+    const tokens = cleaned.split(/\s+/).filter(Boolean);
+
+    return pool.filter((p) => {
+      const cat = this.getCategory(p.categorySlug);
+      const haystack = this.normalize(
+        [
+          p.name.ar,
+          p.name.en,
+          p.subtitle.ar,
+          p.subtitle.en,
+          p.sku,
+          p.size ?? '',
+          cat?.name.ar ?? '',
+          cat?.name.en ?? '',
+        ].join(' '),
+      );
+      return tokens.every((tok) => haystack.includes(tok));
+    });
+  }
+
+  private normalize(text: string): string {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[\u064B-\u065F\u0670]/g, '')
+      .replace(/[أإآٱ]/g, 'ا')
+      .replace(/ة/g, 'ه')
+      .replace(/ى/g, 'ي');
+  }
+
   openLightbox(products: Product[], index: number): void {
     this.lightbox.set({ products, index });
   }

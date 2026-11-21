@@ -309,21 +309,56 @@ import { IconComponent } from '../../shared/icon.component';
     @media (max-width: 900px) {
       .hero {
         min-height: auto;
-        padding-top: calc(var(--header-h) + 1.75rem);
+        padding: calc(var(--header-h) + 1.25rem) 0 4.5rem;
       }
       .slide-grid {
         grid-template-columns: 1fr;
         text-align: center;
-        gap: 2rem;
+        gap: 1.35rem;
       }
-      .copy p {
-        margin-inline: auto;
+      .visual {
+        order: -1;
+      }
+      .visual .frame {
+        width: min(260px, 72vw);
+        aspect-ratio: 1 / 1.05;
+        border-radius: 22px;
+        padding: 0.45rem;
+
+        img {
+          border-radius: 17px;
+        }
+      }
+      .copy {
+        .badge {
+          font-size: 0.78rem;
+          padding: 0.3rem 0.85rem;
+          margin-bottom: 0.75rem;
+        }
+        h1 {
+          font-size: clamp(1.45rem, 6vw, 2rem);
+          margin-bottom: 0.6rem;
+        }
+        p {
+          font-size: 0.9rem;
+          margin: 0 auto 1.25rem;
+        }
       }
       .cta-group {
         justify-content: center;
+        gap: 0.6rem;
+
+        .btn {
+          padding: 0.65rem 1.15rem;
+          font-size: 0.86rem;
+        }
       }
-      .visual .frame {
-        width: min(330px, 86vw);
+      .controls {
+        bottom: 1rem;
+      }
+      .arrow {
+        width: 36px;
+        height: 36px;
       }
     }
   `,

@@ -362,8 +362,45 @@ import { IconComponent } from '../shared/icon.component';
     }
 
     @media (max-width: 560px) {
+      .site-footer {
+        padding: 2.75rem 0 5.5rem;
+      }
+      .greeting-banner {
+        padding: 1rem 1.15rem;
+        margin-bottom: 2.25rem;
+
+        p {
+          font-size: 0.95rem;
+        }
+      }
       .footer-grid {
         grid-template-columns: 1fr;
+        gap: 1.75rem;
+      }
+      .floating-cart {
+        bottom: 1rem;
+        inset-inline-start: 0.85rem;
+        padding: 0.45rem 0.85rem 0.45rem 0.55rem;
+        gap: 0.5rem;
+
+        .fc-icon {
+          width: 36px;
+          height: 36px;
+          font-size: 1.05rem;
+        }
+        .fc-text small {
+          font-size: 0.65rem;
+        }
+        .fc-text strong {
+          font-size: 0.84rem;
+        }
+      }
+      .floating-wa {
+        bottom: 1rem;
+        inset-inline-end: 0.85rem;
+        width: 48px;
+        height: 48px;
+        font-size: 1.55rem;
       }
     }
   `,

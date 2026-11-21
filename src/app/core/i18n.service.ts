@@ -95,6 +95,14 @@ const UI = {
   customerAddress: { ar: 'العنوان أو ملاحظات الطلب', en: 'Address or Order Notes' },
   checkoutWhatsapp: { ar: 'إرسال الطلب عبر واتساب', en: 'Send Order via WhatsApp' },
   continueShopping: { ar: 'مواصلة التسوق', en: 'Continue Shopping' },
+  searchPlaceholder: {
+    ar: 'ابحث عن منتج، قسم، أو رقم صنف (مثال: واقي شمس، شامبو، فحم)...',
+    en: 'Search by product name, category, or SKU (e.g. sunscreen, shampoo, charcoal)...',
+  },
+  searchShort: { ar: 'ابحث عن منتج...', en: 'Search products...' },
+  searchResults: { ar: 'نتائج البحث', en: 'Search Results' },
+  noSearchResults: { ar: 'لا توجد منتجات مطابقة لبحثك', en: 'No products match your search' },
+  clearSearch: { ar: 'مسح البحث', en: 'Clear search' },
 } satisfies Record<string, L>;
 
 export type UiKey = keyof typeof UI;

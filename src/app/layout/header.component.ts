@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CartService } from '../core/cart.service';
 import { I18nService } from '../core/i18n.service';
 import { ProductService } from '../core/product.service';
@@ -22,6 +22,15 @@ import { IconComponent } from '../shared/icon.component';
         </a>
 
         <nav class="nav" [class.open]="menuOpen()">
+          <form class="mobile-search" (submit)="submitSearch($event, mobileSearchInput.value)">
+            <app-icon name="search" />
+            <input
+              #mobileSearchInput
+              type="search"
+              [placeholder]="i18n.t('searchShort')"
+            />
+          </form>
+
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">
             {{ i18n.t('home') }}
           </a>
@@ -48,9 +57,14 @@ import { IconComponent } from '../shared/icon.component';
         </nav>
 
         <div class="header-actions">
+          <a routerLink="/products" class="search-icon-btn" [attr.aria-label]="i18n.t('searchShort')">
+            <app-icon name="search" />
+          </a>
+
           <button type="button" class="lang-btn" (click)="i18n.toggle()" [attr.aria-label]="'Switch language'">
             <app-icon name="globe" />
-            <span>{{ i18n.isAr() ? 'English' : 'العربية' }}</span>
+            <span class="lang-full">{{ i18n.isAr() ? 'English' : 'العربية' }}</span>
+            <span class="lang-short">{{ i18n.isAr() ? 'EN' : 'ع' }}</span>
           </button>
 
           <button type="button" class="cart-btn" (click)="cart.open()" [attr.aria-label]="i18n.t('cartTitle')">
@@ -82,13 +96,13 @@ import { IconComponent } from '../shared/icon.component';
       height: var(--header-h);
       display: flex;
       align-items: center;
-      background: rgba(255, 255, 255, 0.86);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(123, 47, 168, 0.1);
+      border-bottom: 1px solid rgba(23, 130, 82, 0.12);
       transition: box-shadow 0.3s, background 0.3s;
 
       &.scrolled {
-        background: rgba(255, 255, 255, 0.96);
+        background: rgba(255, 255, 255, 0.98);
         box-shadow: var(--shadow-sm);
       }
     }
@@ -97,54 +111,62 @@ import { IconComponent } from '../shared/icon.component';
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1.25rem;
+      gap: 0.75rem;
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.6rem;
+      min-width: 0;
 
       .brand-mark {
-        width: 44px;
-        height: 44px;
-        border-radius: 14px;
+        width: 42px;
+        height: 42px;
+        border-radius: 13px;
         background: linear-gradient(135deg, var(--purple-700), var(--purple-500));
         color: var(--gold-300);
         display: grid;
         place-items: center;
-        font-size: 1.35rem;
-        box-shadow: 0 8px 20px rgba(123, 47, 168, 0.3);
+        font-size: 1.25rem;
+        box-shadow: 0 6px 16px rgba(23, 130, 82, 0.28);
+        flex-shrink: 0;
       }
 
       .brand-text {
         display: flex;
         flex-direction: column;
         line-height: 1.15;
+        min-width: 0;
 
         strong {
-          font-size: 1.2rem;
+          font-size: 1.15rem;
           font-weight: 800;
           color: var(--purple-800);
+          white-space: nowrap;
         }
 
         small {
-          font-size: 0.72rem;
-          letter-spacing: 0.18em;
-          color: var(--gold-500);
+          font-size: 0.68rem;
+          letter-spacing: 0.16em;
+          color: var(--purple-600);
           font-weight: 700;
         }
       }
     }
 
+    .mobile-search {
+      display: none;
+    }
+
     .nav {
       display: flex;
       align-items: center;
-      gap: 0.35rem;
+      gap: 0.3rem;
 
       > a,
       .dropdown > a {
-        padding: 0.5rem 1rem;
+        padding: 0.48rem 0.95rem;
         border-radius: 999px;
         font-weight: 700;
         color: var(--ink);
@@ -217,21 +239,44 @@ import { IconComponent } from '../shared/icon.component';
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
+      flex-shrink: 0;
+    }
+
+    .search-icon-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1.5px solid var(--purple-100);
+      background: var(--purple-50);
+      color: var(--purple-800);
+      display: grid;
+      place-items: center;
+      font-size: 1.05rem;
+      transition: all 0.2s;
+
+      &:hover {
+        background: var(--purple-100);
+        border-color: var(--purple-600);
+      }
     }
 
     .lang-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      padding: 0.45rem 0.9rem;
+      gap: 0.35rem;
+      padding: 0.45rem 0.85rem;
       border-radius: 999px;
       border: 1.5px solid var(--purple-100);
       background: var(--purple-50);
       color: var(--purple-800);
       font-weight: 700;
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       transition: all 0.2s;
+
+      .lang-short {
+        display: none;
+      }
 
       &:hover {
         border-color: var(--purple-500);
@@ -244,14 +289,14 @@ import { IconComponent } from '../shared/icon.component';
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      padding: 0.48rem 1rem;
+      padding: 0.48rem 0.95rem;
       border-radius: 999px;
       border: 0;
       background: linear-gradient(135deg, var(--purple-600), var(--purple-800));
       color: var(--white);
       font-weight: 700;
-      font-size: 0.88rem;
-      box-shadow: 0 6px 18px rgba(123, 47, 168, 0.28);
+      font-size: 0.86rem;
+      box-shadow: 0 6px 16px rgba(23, 130, 82, 0.26);
       transition: transform 0.2s;
 
       &:hover {
@@ -261,11 +306,11 @@ import { IconComponent } from '../shared/icon.component';
       .cart-badge {
         background: var(--gold-400);
         color: var(--purple-900);
-        font-size: 0.74rem;
+        font-size: 0.72rem;
         font-weight: 900;
-        min-width: 20px;
-        height: 20px;
-        padding: 0 0.35rem;
+        min-width: 19px;
+        height: 19px;
+        padding: 0 0.3rem;
         border-radius: 999px;
         display: inline-grid;
         place-items: center;
@@ -275,14 +320,14 @@ import { IconComponent } from '../shared/icon.component';
     .order-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
-      padding: 0.5rem 1.05rem;
+      gap: 0.4rem;
+      padding: 0.48rem 1rem;
       border-radius: 999px;
       background: linear-gradient(135deg, #25d366, #128c7e);
       color: var(--white);
       font-weight: 700;
-      font-size: 0.88rem;
-      box-shadow: 0 6px 18px rgba(37, 211, 102, 0.3);
+      font-size: 0.86rem;
+      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.28);
       transition: transform 0.2s;
 
       &:hover {
@@ -292,14 +337,14 @@ import { IconComponent } from '../shared/icon.component';
 
     .burger {
       display: none;
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      border: 1px solid var(--purple-100);
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      border: 1.5px solid var(--purple-100);
       background: var(--white);
       color: var(--purple-800);
       place-items: center;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
 
     @media (max-width: 960px) {
@@ -307,14 +352,59 @@ import { IconComponent } from '../shared/icon.component';
         display: grid;
       }
 
-      .order-btn span,
-      .cart-label {
+      .order-btn,
+      .cart-label,
+      .lang-full {
         display: none;
       }
 
-      .order-btn,
+      .lang-btn {
+        padding: 0.42rem 0.65rem;
+
+        .lang-short {
+          display: inline;
+        }
+      }
+
       .cart-btn {
-        padding: 0.55rem;
+        padding: 0.5rem 0.65rem;
+      }
+
+      .brand {
+        .brand-mark {
+          width: 36px;
+          height: 36px;
+          border-radius: 10px;
+          font-size: 1.05rem;
+        }
+        .brand-text strong {
+          font-size: 1rem;
+        }
+        .brand-text small {
+          font-size: 0.6rem;
+        }
+      }
+
+      .mobile-search {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        background: var(--purple-50);
+        border: 1.5px solid var(--purple-100);
+        border-radius: 12px;
+        padding: 0.55rem 0.85rem;
+        margin-bottom: 0.5rem;
+        color: var(--purple-700);
+
+        input {
+          border: 0;
+          background: transparent;
+          width: 100%;
+          font-family: inherit;
+          font-size: 0.92rem;
+          color: var(--ink);
+          outline: none;
+        }
       }
 
       .nav {
@@ -324,7 +414,7 @@ import { IconComponent } from '../shared/icon.component';
         background: var(--white);
         flex-direction: column;
         align-items: stretch;
-        padding: 1rem 1.25rem 1.5rem;
+        padding: 0.9rem 1.1rem 1.35rem;
         box-shadow: var(--shadow-lg);
         border-bottom: 1px solid var(--purple-100);
         max-height: calc(100vh - var(--header-h));
@@ -348,7 +438,7 @@ import { IconComponent } from '../shared/icon.component';
         transform: none;
         box-shadow: none;
         border: 0;
-        padding: 0.25rem 0.75rem;
+        padding: 0.25rem 0.6rem;
         background: var(--purple-50);
         margin-top: 0.25rem;
       }
@@ -363,6 +453,7 @@ export class HeaderComponent {
   readonly i18n = inject(I18nService);
   readonly ps = inject(ProductService);
   readonly cart = inject(CartService);
+  private readonly router = inject(Router);
   readonly menuOpen = signal(false);
   readonly scrolled = signal(false);
 
@@ -372,5 +463,11 @@ export class HeaderComponent {
 
   closeMenu(): void {
     this.menuOpen.set(false);
+  }
+
+  submitSearch(event: Event, q: string): void {
+    event.preventDefault();
+    this.closeMenu();
+    this.router.navigate(['/products'], { queryParams: q.trim() ? { q: q.trim() } : {} });
   }
 }

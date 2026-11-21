@@ -314,21 +314,71 @@ import { IconComponent } from './icon.component';
 
     @media (max-width: 640px) {
       .zoom-btn,
-      .sku-tag {
+      .sku-tag,
+      .btn-icon-view {
         display: none;
       }
+      .badge-size {
+        top: 0.5rem;
+        inset-inline-start: 0.5rem;
+        font-size: 0.68rem;
+        padding: 0.15rem 0.5rem;
+      }
+      .badge-price {
+        top: 0.5rem;
+        inset-inline-end: 0.5rem;
+        font-size: 0.74rem;
+        padding: 0.18rem 0.55rem;
+      }
       .body {
-        padding: 0.85rem;
+        padding: 0.75rem;
 
+        .top-meta {
+          margin-bottom: 0.35rem;
+        }
+        .cat-tag {
+          font-size: 0.68rem;
+          padding: 0.1rem 0.5rem;
+        }
         h3 {
-          font-size: 0.9rem;
+          font-size: 0.86rem;
+          line-height: 1.35;
+          margin-bottom: 0.25rem;
         }
         p {
-          font-size: 0.78rem;
+          font-size: 0.75rem;
+          margin-bottom: 0.6rem;
+          -webkit-line-clamp: 2;
         }
       }
-      .price-row .price-val {
-        font-size: 0.96rem;
+      .price-row {
+        padding: 0.4rem 0.6rem;
+        margin-bottom: 0.6rem;
+
+        .price-label {
+          font-size: 0.72rem;
+        }
+        .price-val {
+          font-size: 0.92rem;
+        }
+      }
+      .btn-add {
+        padding: 0.55rem 0.65rem;
+        font-size: 0.8rem;
+        border-radius: 10px;
+      }
+      .qty-control {
+        padding: 0.2rem;
+        border-radius: 10px;
+
+        .q-btn {
+          width: 30px;
+          height: 30px;
+          border-radius: 8px;
+        }
+        .q-val {
+          font-size: 0.9rem;
+        }
       }
     }
   `,

@@ -29,6 +29,7 @@ const ICONS: Record<string, string> = {
   plus: '<path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M12 5v14M5 12h14"/>',
   minus: '<path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M5 12h14"/>',
   trash: '<path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M9 7V4h6v3m-8 0 1 13h8l1-13M10 11v6m4-6v6"/>',
+  search: '<circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="m20 20-4.3-4.3"/>',
   // Category icons
   jar: '<path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M5 9h14v9a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V9Zm-1-5h16v5H4V4Z"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M9 14h6"/>',
   tooth: '<path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 5.5C10 4 6 3.5 5 6.5c-1 3 .5 5.5 1 8 .5 2.8 1 6.5 2.5 6.5S10 16 12 16s2 5 3.5 5 2-3.7 2.5-6.5c.5-2.5 2-5 1-8-1-3-5-2.5-7-1Z"/>',

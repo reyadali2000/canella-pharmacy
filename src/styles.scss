@@ -261,11 +261,57 @@ h4 {
 }
 
 @media (max-width: 640px) {
-  .section {
-    padding: 4rem 0;
+  :root {
+    --header-h: 66px;
+    --radius-lg: 18px;
+    --radius-md: 14px;
   }
+
+  .container {
+    width: min(1200px, 100% - 1.5rem);
+  }
+
+  .section {
+    padding: 2.75rem 0;
+  }
+
+  .section-head {
+    margin-bottom: 1.85rem;
+
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-size: 0.92rem;
+    }
+  }
+
+  .btn {
+    padding: 0.72rem 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .page-banner {
+    padding: calc(var(--header-h) + 2rem) 0 2.25rem;
+
+    h1 {
+      font-size: 1.65rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+
   .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 370px) {
+  .product-grid {
+    grid-template-columns: 1fr;
   }
 }

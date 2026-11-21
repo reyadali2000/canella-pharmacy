@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
@@ -28,9 +28,26 @@ import { ProductCardComponent } from '../../shared/product-card.component';
 
       <section class="section">
         <div class="container">
+          @if (cat.products.length > 1) {
+            <div class="cat-search">
+              <app-icon name="search" />
+              <input
+                type="search"
+                [placeholder]="i18n.t('searchShort')"
+                [value]="query()"
+                (input)="onQuery($event)"
+              />
+              @if (query()) {
+                <button type="button" (click)="query.set('')">
+                  <app-icon name="close" />
+                </button>
+              }
+            </div>
+          }
+
           <div class="product-grid">
-            @for (p of cat.products; track p.id; let i = $index) {
-              <app-product-card [product]="p" [list]="cat.products" [index]="i" />
+            @for (p of filteredProducts(); track p.id; let i = $index) {
+              <app-product-card [product]="p" [list]="filteredProducts()" [index]="i" />
             }
           </div>
 
@@ -60,6 +77,41 @@ import { ProductCardComponent } from '../../shared/product-card.component';
     }
   `,
   styles: `
+    .cat-search {
+      max-width: 520px;
+      margin: 0 auto 1.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--white);
+      border: 1.5px solid var(--purple-100);
+      border-radius: 999px;
+      padding: 0.35rem 1rem;
+      box-shadow: var(--shadow-sm);
+      color: var(--purple-700);
+
+      input {
+        flex: 1;
+        border: 0;
+        background: transparent;
+        padding: 0.5rem 0;
+        font-family: inherit;
+        font-size: 0.94rem;
+        outline: none;
+      }
+
+      button {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        border: 0;
+        background: var(--purple-50);
+        color: var(--purple-800);
+        display: grid;
+        place-items: center;
+      }
+    }
+
     .other-cats {
       margin-top: 4.5rem;
       padding-top: 2.5rem;
@@ -135,4 +187,13 @@ export class CategoryComponent {
   });
 
   readonly category = computed(() => this.ps.getCategory(this.slug()));
+  readonly query = signal<string>('');
+  readonly filteredProducts = computed(() => {
+    const cat = this.category();
+    return cat ? this.ps.searchProducts(this.query(), cat.products) : [];
+  });
+
+  onQuery(e: Event): void {
+    this.query.set((e.target as HTMLInputElement).value);
+  }
 }
