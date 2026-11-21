@@ -12,7 +12,12 @@ import { IconComponent } from './icon.component';
     <article class="card">
       <div class="media" (click)="open()">
         <img [src]="product().image" [alt]="i18n.tr(product().name)" loading="lazy" />
-        @if (product().size) {
+        @if (bestSeller()) {
+          <span class="badge-best">
+            <app-icon name="fire" />
+            <span>{{ i18n.t('bestSellerBadge') }}</span>
+          </span>
+        } @else if (product().size) {
           <span class="badge-size" dir="ltr">{{ product().size }}</span>
         }
         <span class="badge-price">{{ i18n.formatPrice(product().price) }}</span>
@@ -115,6 +120,22 @@ import { IconComponent } from './icon.component';
       font-size: 0.76rem;
       padding: 0.2rem 0.65rem;
       border-radius: 999px;
+    }
+
+    .badge-best {
+      position: absolute;
+      top: 0.85rem;
+      inset-inline-start: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.28rem;
+      background: linear-gradient(135deg, #d97706, #b45309);
+      color: var(--white);
+      font-weight: 800;
+      font-size: 0.74rem;
+      padding: 0.22rem 0.65rem;
+      border-radius: 999px;
+      box-shadow: 0 6px 14px rgba(180, 83, 9, 0.35);
     }
 
     .badge-price {
@@ -318,10 +339,11 @@ import { IconComponent } from './icon.component';
       .btn-icon-view {
         display: none;
       }
-      .badge-size {
+      .badge-size,
+      .badge-best {
         top: 0.5rem;
         inset-inline-start: 0.5rem;
-        font-size: 0.68rem;
+        font-size: 0.66rem;
         padding: 0.15rem 0.5rem;
       }
       .badge-price {
@@ -392,6 +414,7 @@ export class ProductCardComponent {
   readonly product = input.required<Product>();
   readonly list = input<Product[]>();
   readonly index = input<number>(0);
+  readonly bestSeller = input<boolean>(false);
 
   readonly qty = computed(() => this.cart.getQty(this.product().id));
 

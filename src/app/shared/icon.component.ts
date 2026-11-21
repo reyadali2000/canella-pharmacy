@@ -30,6 +30,10 @@ const ICONS: Record<string, string> = {
   minus: '<path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M5 12h14"/>',
   trash: '<path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M9 7V4h6v3m-8 0 1 13h8l1-13M10 11v6m4-6v6"/>',
   search: '<circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="m20 20-4.3-4.3"/>',
+  pill: '<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="m10.5 4.5 9 9a4.24 4.24 0 0 1-6 6l-9-9a4.24 4.24 0 0 1 6-6Zm-3 9 6-6"/>',
+  sun: '<circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.9"/><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/>',
+  fire: '<path fill="currentColor" d="M13.5 2.5c.3 2.5-1.2 4.2-2.4 5.6-1.3 1.5-2.1 2.9-1.6 4.9.4-1 1.4-1.7 2.2-2.4.3 2 1.8 3.2 1.8 5.2a3.5 3.5 0 0 1-3.5 3.5 3.6 3.6 0 0 1-3.4-2.5C5.1 15.1 5 12 6.8 9.2c-.3 1.2 0 2.1.6 2.7-.2-3.5 2.4-6.9 6.1-9.4ZM12 22a7 7 0 0 0 7-7c0-3.3-2.1-5.8-3.8-7.5-.2 1.3-.9 2.2-1.8 2.8 1.5 1.8 2.1 3.7 1.4 5.9-.7 2.1-2.8 3.4-4.9 3.1A5.9 5.9 0 0 0 12 22Z"/>',
+  medicalCross: '<path fill="currentColor" d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6V3Z"/>',
   // Category icons
   jar: '<path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M5 9h14v9a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V9Zm-1-5h16v5H4V4Z"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M9 14h6"/>',
   tooth: '<path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 5.5C10 4 6 3.5 5 6.5c-1 3 .5 5.5 1 8 .5 2.8 1 6.5 2.5 6.5S10 16 12 16s2 5 3.5 5 2-3.7 2.5-6.5c.5-2.5 2-5 1-8-1-3-5-2.5-7-1Z"/>',

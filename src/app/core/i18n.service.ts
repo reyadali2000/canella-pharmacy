@@ -103,6 +103,47 @@ const UI = {
   searchResults: { ar: 'نتائج البحث', en: 'Search Results' },
   noSearchResults: { ar: 'لا توجد منتجات مطابقة لبحثك', en: 'No products match your search' },
   clearSearch: { ar: 'مسح البحث', en: 'Clear search' },
+  // Store Categories & Best Sellers
+  storeDepartments: { ar: 'التصنيفات', en: 'Categories' },
+  storeDepartmentsSub: {
+    ar: 'تصفح أقسام الصيدلية: أدوية وعلاجات، عناية بالبشرة، واقيات شمسية، شعر وأسنان',
+    en: 'Browse pharmacy departments: medicines & treatments, skincare, sun care, hair & dental',
+  },
+  deptMedicines: { ar: 'أدوية وعلاجات', en: 'Medicines & Treatments' },
+  deptMedicinesSub: { ar: 'علاجات جلدية وطبية متخصصة', en: 'Specialized dermatological & medical care' },
+  deptSkincare: { ar: 'العناية بالبشرة', en: 'Skincare' },
+  deptSkincareSub: { ar: 'كريمات ترطيب، غسول وأقنعة', en: 'Moisturizers, cleansers & masks' },
+  deptSuncare: { ar: 'واقيات شمسية', en: 'Sun Care SPF 50' },
+  deptSuncareSub: { ar: 'حماية فائقة لجميع أنواع البشرة', en: 'SPF 50 protection for all skin types' },
+  deptHaircare: { ar: 'العناية بالشعر', en: 'Hair Care' },
+  deptHaircareSub: { ar: 'شامبو وبلسم طبيعي مغذٍّ', en: 'Nourishing shampoos & conditioner' },
+  deptDental: { ar: 'الفم والأسنان', en: 'Dental Care' },
+  deptDentalSub: { ar: 'تبييض، حساسية، فحم وأطفال', en: 'Whitening, sensitivity, charcoal & kids' },
+  deptBodyFoot: { ar: 'الجسم والقدمين', en: 'Body & Foot' },
+  deptBodyFootSub: { ar: 'غسول لافندر وعلاج التشققات', en: 'Lavender wash & cracked heel repair' },
+  deptPrescription: { ar: 'اطلب دواءك / وصفتك', en: 'Order Prescription' },
+  deptPrescriptionSub: { ar: 'تواصل مع الصيدلي مباشرة', en: 'Chat directly with our pharmacist' },
+  bestSellers: { ar: 'المنتجات الأكثر مبيعاً', en: 'Best-Selling Products' },
+  bestSellersSub: {
+    ar: 'الأصناف الأكثر طلباً وثقة لدى عملاء صيدلية كانيلا',
+    en: 'Top-rated and most ordered products by Canella Pharmacy customers',
+  },
+  bestSellerBadge: { ar: 'الأكثر مبيعاً', en: 'Best Seller' },
+  tabAll: { ar: 'الكل', en: 'All' },
+  tabTreatments: { ar: 'أدوية وعلاجات', en: 'Medicines & Repair' },
+  tabSkinSun: { ar: 'بشرة وواقي شمس', en: 'Skincare & Sun' },
+  tabHairBody: { ar: 'شعر وجسم', en: 'Hair & Body' },
+  tabDental: { ar: 'الفم والأسنان', en: 'Dental Care' },
+  rxBannerTitle: { ar: 'هل تبحث عن دواء معين أو لديك وصفة طبية؟', en: 'Looking for a medicine or have a prescription?' },
+  rxBannerSub: {
+    ar: 'أرسل اسم الدواء أو صورة الوصفة الطبية عبر واتساب وسنقوم بتجهيزها لك فوراً',
+    en: 'Send the medicine name or prescription photo via WhatsApp and we will prepare it right away',
+  },
+  rxBannerBtn: { ar: 'اطلب دواءك عبر واتساب', en: 'Order Medicine via WhatsApp' },
+  waPrescriptionMsg: {
+    ar: 'مرحباً صيدلية كانيلا، أرغب في الاستفسار عن دواء / إرسال وصفة طبية:',
+    en: 'Hello Canella Pharmacy, I would like to inquire about a medicine / send a prescription:',
+  },
 } satisfies Record<string, L>;
 
 export type UiKey = keyof typeof UI;

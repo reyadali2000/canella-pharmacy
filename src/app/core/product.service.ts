@@ -94,4 +94,9 @@ export class ProductService {
       : this.i18n.t('waGeneral');
     return `https://wa.me/${this.contact.whatsappInt}?text=${encodeURIComponent(text)}`;
   }
+
+  prescriptionWhatsappUrl(): string {
+    const text = this.i18n.t('waPrescriptionMsg');
+    return `https://wa.me/${this.contact.whatsappInt}?text=${encodeURIComponent(text)}`;
+  }
 }
