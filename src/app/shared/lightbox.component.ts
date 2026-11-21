@@ -93,7 +93,7 @@ import { IconComponent } from './icon.component';
       position: fixed;
       inset: 0;
       z-index: 200;
-      background: rgba(20, 6, 32, 0.85);
+      background: rgba(14, 28, 23, 0.85);
       backdrop-filter: blur(10px);
       display: grid;
       place-items: center;
@@ -115,7 +115,7 @@ import { IconComponent } from './icon.component';
     }
 
     .img-wrap {
-      background: #170824;
+      background: #10211b;
       display: grid;
       place-items: center;
       max-height: 92vh;

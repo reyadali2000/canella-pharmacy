@@ -101,16 +101,16 @@ import { IconComponent } from '../shared/icon.component';
   styles: `
     .site-footer {
       background:
-        radial-gradient(circle at 85% 15%, rgba(201, 162, 74, 0.18), transparent 40%),
-        linear-gradient(160deg, var(--purple-900), #1a0728);
-      color: rgba(255, 255, 255, 0.86);
+        radial-gradient(circle at 85% 15%, rgba(23, 130, 82, 0.25), transparent 40%),
+        linear-gradient(160deg, var(--purple-900), #0e1c17);
+      color: rgba(255, 255, 255, 0.88);
       padding: 4rem 0 2rem;
       margin-top: 3rem;
     }
 
     .greeting-banner {
-      background: linear-gradient(135deg, rgba(201, 162, 74, 0.2), rgba(155, 77, 202, 0.25));
-      border: 1px solid rgba(220, 188, 108, 0.35);
+      background: linear-gradient(135deg, rgba(23, 130, 82, 0.28), rgba(31, 59, 49, 0.45));
+      border: 1px solid rgba(127, 224, 178, 0.35);
       border-radius: var(--radius-lg);
       padding: 1.35rem 1.75rem;
       text-align: center;

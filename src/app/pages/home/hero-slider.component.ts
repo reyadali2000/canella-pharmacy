@@ -81,9 +81,9 @@ import { IconComponent } from '../../shared/icon.component';
       min-height: min(760px, 94vh);
       padding: calc(var(--header-h) + 2.5rem) 0 5.5rem;
       background:
-        radial-gradient(circle at 18% 22%, rgba(201, 162, 74, 0.25), transparent 38%),
-        radial-gradient(circle at 82% 76%, rgba(155, 77, 202, 0.42), transparent 44%),
-        linear-gradient(135deg, #1d082b 0%, var(--purple-900) 48%, var(--purple-700) 100%);
+        radial-gradient(circle at 18% 22%, rgba(127, 224, 178, 0.22), transparent 38%),
+        radial-gradient(circle at 82% 76%, rgba(23, 130, 82, 0.42), transparent 44%),
+        linear-gradient(135deg, #10211b 0%, var(--purple-800) 48%, var(--purple-700) 100%);
       color: var(--white);
       overflow: hidden;
       display: flex;
@@ -141,8 +141,8 @@ import { IconComponent } from '../../shared/icon.component';
         gap: 0.45rem;
         padding: 0.4rem 1rem;
         border-radius: 999px;
-        background: rgba(201, 162, 74, 0.18);
-        border: 1px solid rgba(220, 188, 108, 0.45);
+        background: rgba(23, 130, 82, 0.28);
+        border: 1px solid rgba(127, 224, 178, 0.45);
         color: var(--gold-300);
         font-weight: 700;
         font-size: 0.88rem;
@@ -187,7 +187,7 @@ import { IconComponent } from '../../shared/icon.component';
         width: 86%;
         aspect-ratio: 1;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(220, 188, 108, 0.45), rgba(155, 77, 202, 0.1) 68%, transparent);
+        background: radial-gradient(circle, rgba(127, 224, 178, 0.42), rgba(23, 130, 82, 0.12) 68%, transparent);
         filter: blur(22px);
       }
 
@@ -197,10 +197,10 @@ import { IconComponent } from '../../shared/icon.component';
         aspect-ratio: 4 / 4.4;
         border-radius: 32px;
         padding: 0.65rem;
-        background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(243, 233, 250, 0.9));
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(237, 247, 242, 0.92));
         box-shadow:
           0 28px 65px rgba(0, 0, 0, 0.45),
-          0 0 0 1px rgba(220, 188, 108, 0.45);
+          0 0 0 1px rgba(127, 224, 178, 0.45);
         overflow: hidden;
 
         img {
