@@ -113,7 +113,7 @@ import { HeroSliderComponent } from './hero-slider.component';
               <app-icon name="whatsapp" />
               <span>{{ i18n.t('orderWhatsapp') }}</span>
             </a>
-            <a [href]="'tel:' + ps.contact.phone" class="btn btn-gold">
+            <a [href]="'tel:' + ps.contact.phoneHref" class="btn btn-gold">
               <app-icon name="phone" />
               <span dir="ltr">{{ ps.contact.phone }}</span>
             </a>

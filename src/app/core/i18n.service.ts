@@ -41,14 +41,14 @@ const UI = {
   f3t: { ar: 'مكونات طبيعية', en: 'Natural Ingredients' },
   f3d: { ar: 'تركيبات غنية بالزيوت والمستخلصات الطبيعية', en: 'Formulas rich in natural oils and extracts' },
   f4t: { ar: 'طلب سهل وسريع', en: 'Easy Ordering' },
-  f4d: { ar: 'اطلب منتجاتك بسهولة عبر الهاتف أو واتساب', en: 'Order easily by phone or WhatsApp' },
+  f4d: { ar: 'أضف منتجاتك للسلة وأرسل طلبك مباشرة عبر واتساب', en: 'Add items to your cart and send your order straight via WhatsApp' },
   ctaTitle: { ar: 'هل تبحث عن منتج معين؟', en: 'Looking for a specific product?' },
   ctaText: {
     ar: 'تواصل معنا الآن وسنساعدك في اختيار المنتج المناسب لك',
     en: 'Contact us now and we will help you choose the right product',
   },
   filterAll: { ar: 'الكل', en: 'All' },
-  allProductsSub: { ar: 'تصفح جميع منتجاتنا واختر ما يناسبك', en: 'Browse all our products and choose what suits you' },
+  allProductsSub: { ar: 'تصفح جميع منتجاتنا بأسعارها الرسمية وأضفها للسلة', en: 'Browse all our products with official prices and add them to your cart' },
   notFound: { ar: 'القسم غير موجود', en: 'Category not found' },
   backHome: { ar: 'العودة للرئيسية', en: 'Back to Home' },
   otherCategories: { ar: 'أقسام أخرى', en: 'Other Categories' },
@@ -74,8 +74,27 @@ const UI = {
   close: { ar: 'إغلاق', en: 'Close' },
   prev: { ar: 'السابق', en: 'Previous' },
   next: { ar: 'التالي', en: 'Next' },
-  waMessage: { ar: 'مرحباً، أرغب في الاستفسار عن منتج:', en: 'Hello, I would like to ask about the product:' },
+  waMessage: { ar: 'مرحباً، أرغب في طلب منتج:', en: 'Hello, I would like to order:' },
   waGeneral: { ar: 'مرحباً، أرغب في الاستفسار عن منتجات كانيلا ماكس', en: 'Hello, I would like to ask about CANELLA MAX products' },
+  // Pricing & Cart keys
+  currency: { ar: 'ر.ي', en: 'YER' },
+  sku: { ar: 'رقم الصنف', en: 'SKU' },
+  price: { ar: 'السعر', en: 'Price' },
+  addToCart: { ar: 'أضف للسلة', en: 'Add to Cart' },
+  inCart: { ar: 'في السلة', en: 'In Cart' },
+  cartTitle: { ar: 'سلة الطلبات', en: 'Shopping Cart' },
+  cartEmpty: { ar: 'سلة الطلبات فارغة حالياً', en: 'Your shopping cart is currently empty' },
+  cartEmptySub: { ar: 'تصفح المنتجات وأضف ما يعجبك إلى السلة لطلبه بسهولة', en: 'Browse our products and add your favorites to order easily' },
+  clearCart: { ar: 'تفريغ السلة', en: 'Clear Cart' },
+  removeItem: { ar: 'حذف من السلة', en: 'Remove item' },
+  totalItems: { ar: 'عدد القطع', en: 'Total Items' },
+  totalAmount: { ar: 'الإجمالي الكلي', en: 'Grand Total' },
+  customerInfo: { ar: 'بيانات التوصيل (اختياري)', en: 'Delivery Details (Optional)' },
+  customerName: { ar: 'الاسم الكريم', en: 'Your Name' },
+  customerPhone: { ar: 'رقم الهاتف', en: 'Phone Number' },
+  customerAddress: { ar: 'العنوان أو ملاحظات الطلب', en: 'Address or Order Notes' },
+  checkoutWhatsapp: { ar: 'إرسال الطلب عبر واتساب', en: 'Send Order via WhatsApp' },
+  continueShopping: { ar: 'مواصلة التسوق', en: 'Continue Shopping' },
 } satisfies Record<string, L>;
 
 export type UiKey = keyof typeof UI;
@@ -117,6 +136,11 @@ export class I18nService {
     return value[this.lang()];
   }
 
+  /** Format a price with thousand separators and current currency label. */
+  formatPrice(amount: number): string {
+    return `${amount.toLocaleString('en-US')} ${this.t('currency')}`;
+  }
+
   private initialLang(): Lang {
     try {
       const saved = localStorage.getItem('canella-lang');
@@ -127,4 +151,3 @@ export class I18nService {
     return 'ar';
   }
 }
-

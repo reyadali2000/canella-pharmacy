@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { CartService } from '../core/cart.service';
 import { I18nService } from '../core/i18n.service';
 import { ProductService } from '../core/product.service';
 import { Product } from '../core/products.data';
@@ -14,6 +15,8 @@ import { IconComponent } from './icon.component';
         @if (product().size) {
           <span class="badge-size" dir="ltr">{{ product().size }}</span>
         }
+        <span class="badge-price">{{ i18n.formatPrice(product().price) }}</span>
+
         <button type="button" class="zoom-btn" [attr.aria-label]="i18n.t('viewDetails')">
           <app-icon name="zoom" />
           <span>{{ i18n.t('viewDetails') }}</span>
@@ -21,18 +24,40 @@ import { IconComponent } from './icon.component';
       </div>
 
       <div class="body">
-        <span class="cat-tag">{{ ps.getCategoryName(product().categorySlug) }}</span>
+        <div class="top-meta">
+          <span class="cat-tag">{{ ps.getCategoryName(product().categorySlug) }}</span>
+          <span class="sku-tag" dir="ltr">#{{ product().sku }}</span>
+        </div>
+
         <h3 (click)="open()">{{ i18n.tr(product().name) }}</h3>
         <p>{{ i18n.tr(product().subtitle) }}</p>
 
+        <div class="price-row">
+          <span class="price-label">{{ i18n.t('price') }}:</span>
+          <strong class="price-val">{{ i18n.formatPrice(product().price) }}</strong>
+        </div>
+
         <div class="actions">
-          <button type="button" class="btn-view" (click)="open()">
+          @if (qty() === 0) {
+            <button type="button" class="btn-add" (click)="cart.add(product(), 1)">
+              <app-icon name="cart" />
+              <span>{{ i18n.t('addToCart') }}</span>
+            </button>
+          } @else {
+            <div class="qty-control">
+              <button type="button" class="q-btn" (click)="cart.add(product(), -1)" aria-label="Decrease">
+                <app-icon name="minus" />
+              </button>
+              <span class="q-val">{{ qty() }}</span>
+              <button type="button" class="q-btn" (click)="cart.add(product(), 1)" aria-label="Increase">
+                <app-icon name="plus" />
+              </button>
+            </div>
+          }
+
+          <button type="button" class="btn-icon-view" (click)="open()" [attr.aria-label]="i18n.t('viewDetails')">
             <app-icon name="zoom" />
-            <span>{{ i18n.t('viewDetails') }}</span>
           </button>
-          <a [href]="ps.whatsappUrl(product())" target="_blank" rel="noopener" class="btn-wa" [attr.aria-label]="i18n.t('orderWhatsapp')">
-            <app-icon name="whatsapp" />
-          </a>
         </div>
       </div>
     </article>
@@ -87,23 +112,36 @@ import { IconComponent } from './icon.component';
       backdrop-filter: blur(8px);
       color: var(--gold-300);
       font-weight: 700;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       padding: 0.2rem 0.65rem;
       border-radius: 999px;
+    }
+
+    .badge-price {
+      position: absolute;
+      top: 0.85rem;
+      inset-inline-end: 0.85rem;
+      background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+      color: var(--purple-900);
+      font-weight: 900;
+      font-size: 0.84rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
     }
 
     .zoom-btn {
       position: absolute;
       inset-inline: 1rem;
       bottom: 1rem;
-      padding: 0.65rem 1rem;
+      padding: 0.6rem 1rem;
       border-radius: 999px;
       border: 0;
       background: rgba(42, 15, 61, 0.86);
       backdrop-filter: blur(10px);
       color: var(--white);
       font-weight: 700;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -114,27 +152,39 @@ import { IconComponent } from './icon.component';
     }
 
     .body {
-      padding: 1.25rem 1.3rem 1.35rem;
+      padding: 1.15rem 1.25rem 1.3rem;
       display: flex;
       flex-direction: column;
       flex: 1;
 
+      .top-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.4rem;
+        margin-bottom: 0.5rem;
+      }
+
       .cat-tag {
-        align-self: flex-start;
-        font-size: 0.76rem;
+        font-size: 0.74rem;
         font-weight: 700;
         color: var(--purple-600);
         background: var(--purple-100);
         padding: 0.15rem 0.65rem;
         border-radius: 999px;
-        margin-bottom: 0.55rem;
+      }
+
+      .sku-tag {
+        font-size: 0.72rem;
+        color: var(--muted);
+        font-weight: 600;
       }
 
       h3 {
-        font-size: 1.05rem;
+        font-size: 1.02rem;
         font-weight: 800;
         color: var(--purple-900);
-        margin-bottom: 0.4rem;
+        margin-bottom: 0.35rem;
         cursor: pointer;
         display: -webkit-box;
         -webkit-line-clamp: 2;
@@ -148,9 +198,9 @@ import { IconComponent } from './icon.component';
 
       p {
         color: var(--muted);
-        font-size: 0.88rem;
-        margin: 0 0 1.1rem;
-        line-height: 1.55;
+        font-size: 0.85rem;
+        margin: 0 0 0.85rem;
+        line-height: 1.5;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -159,64 +209,126 @@ import { IconComponent } from './icon.component';
       }
     }
 
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 0.55rem 0.8rem;
+      border-radius: 12px;
+      background: var(--purple-50);
+      margin-bottom: 0.85rem;
+
+      .price-label {
+        font-size: 0.8rem;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .price-val {
+        font-size: 1.12rem;
+        font-weight: 900;
+        color: var(--purple-800);
+      }
+    }
+
     .actions {
       display: flex;
-      gap: 0.55rem;
+      gap: 0.5rem;
       margin-top: auto;
     }
 
-    .btn-view {
+    .btn-add {
       flex: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.4rem;
-      padding: 0.6rem 0.9rem;
+      gap: 0.45rem;
+      padding: 0.65rem 0.9rem;
       border-radius: 12px;
-      border: 1.5px solid var(--purple-100);
-      background: var(--purple-50);
-      color: var(--purple-800);
+      border: 0;
+      background: linear-gradient(135deg, var(--purple-600), var(--purple-800));
+      color: var(--white);
       font-weight: 700;
-      font-size: 0.86rem;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      font-size: 0.88rem;
+      box-shadow: 0 6px 16px rgba(123, 47, 168, 0.28);
+      transition: transform 0.2s, box-shadow 0.2s;
 
       &:hover {
-        background: var(--purple-700);
-        border-color: var(--purple-700);
-        color: var(--white);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 22px rgba(123, 47, 168, 0.38);
       }
     }
 
-    .btn-wa {
+    .qty-control {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--purple-100);
+      border-radius: 12px;
+      padding: 0.25rem;
+
+      .q-btn {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        border: 0;
+        background: var(--purple-700);
+        color: var(--white);
+        display: grid;
+        place-items: center;
+        font-size: 0.95rem;
+        transition: background 0.2s;
+
+        &:hover {
+          background: var(--purple-900);
+        }
+      }
+
+      .q-val {
+        font-weight: 900;
+        font-size: 1rem;
+        color: var(--purple-900);
+        min-width: 2rem;
+        text-align: center;
+      }
+    }
+
+    .btn-icon-view {
       width: 40px;
       height: 40px;
       border-radius: 12px;
-      background: linear-gradient(135deg, #25d366, #128c7e);
-      color: var(--white);
+      border: 1.5px solid var(--purple-100);
+      background: var(--white);
+      color: var(--purple-700);
       display: grid;
       place-items: center;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       flex-shrink: 0;
-      transition: transform 0.2s;
+      transition: background 0.2s, color 0.2s;
 
       &:hover {
-        transform: scale(1.07);
+        background: var(--purple-100);
       }
     }
 
     @media (max-width: 640px) {
-      .zoom-btn {
+      .zoom-btn,
+      .sku-tag {
         display: none;
       }
       .body {
-        padding: 0.9rem;
+        padding: 0.85rem;
 
         h3 {
-          font-size: 0.92rem;
+          font-size: 0.9rem;
         }
         p {
-          font-size: 0.8rem;
+          font-size: 0.78rem;
         }
+      }
+      .price-row .price-val {
+        font-size: 0.96rem;
       }
     }
   `,
@@ -225,10 +337,13 @@ import { IconComponent } from './icon.component';
 export class ProductCardComponent {
   readonly i18n = inject(I18nService);
   readonly ps = inject(ProductService);
+  readonly cart = inject(CartService);
 
   readonly product = input.required<Product>();
   readonly list = input<Product[]>();
   readonly index = input<number>(0);
+
+  readonly qty = computed(() => this.cart.getQty(this.product().id));
 
   open(): void {
     const items = this.list() ?? [this.product()];

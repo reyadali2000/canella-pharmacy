@@ -40,7 +40,7 @@ import { RevealDirective } from '../../shared/reveal.directive';
                 <app-icon name="whatsapp" />
                 <span>{{ i18n.t('orderWhatsapp') }}</span>
               </a>
-              <a [href]="'tel:' + ps.contact.phone" class="btn btn-primary">
+              <a [href]="'tel:' + ps.contact.phoneHref" class="btn btn-primary">
                 <app-icon name="phone" />
                 <span>{{ i18n.t('callUs') }}: <b dir="ltr">{{ ps.contact.phone }}</b></span>
               </a>

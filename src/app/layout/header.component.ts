@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { CartService } from '../core/cart.service';
 import { I18nService } from '../core/i18n.service';
 import { ProductService } from '../core/product.service';
 import { IconComponent } from '../shared/icon.component';
@@ -50,6 +51,14 @@ import { IconComponent } from '../shared/icon.component';
           <button type="button" class="lang-btn" (click)="i18n.toggle()" [attr.aria-label]="'Switch language'">
             <app-icon name="globe" />
             <span>{{ i18n.isAr() ? 'English' : 'العربية' }}</span>
+          </button>
+
+          <button type="button" class="cart-btn" (click)="cart.open()" [attr.aria-label]="i18n.t('cartTitle')">
+            <app-icon name="cart" />
+            <span class="cart-label">{{ i18n.t('cartTitle') }}</span>
+            @if (cart.totalCount() > 0) {
+              <b class="cart-badge">{{ cart.totalCount() }}</b>
+            }
           </button>
 
           <a [href]="ps.whatsappUrl()" target="_blank" rel="noopener" class="order-btn">
@@ -208,20 +217,20 @@ import { IconComponent } from '../shared/icon.component';
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
     }
 
     .lang-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      padding: 0.45rem 0.95rem;
+      padding: 0.45rem 0.9rem;
       border-radius: 999px;
       border: 1.5px solid var(--purple-100);
       background: var(--purple-50);
       color: var(--purple-800);
       font-weight: 700;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       transition: all 0.2s;
 
       &:hover {
@@ -230,16 +239,49 @@ import { IconComponent } from '../shared/icon.component';
       }
     }
 
+    .cart-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.48rem 1rem;
+      border-radius: 999px;
+      border: 0;
+      background: linear-gradient(135deg, var(--purple-600), var(--purple-800));
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.88rem;
+      box-shadow: 0 6px 18px rgba(123, 47, 168, 0.28);
+      transition: transform 0.2s;
+
+      &:hover {
+        transform: translateY(-2px);
+      }
+
+      .cart-badge {
+        background: var(--gold-400);
+        color: var(--purple-900);
+        font-size: 0.74rem;
+        font-weight: 900;
+        min-width: 20px;
+        height: 20px;
+        padding: 0 0.35rem;
+        border-radius: 999px;
+        display: inline-grid;
+        place-items: center;
+      }
+    }
+
     .order-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      padding: 0.5rem 1.1rem;
+      padding: 0.5rem 1.05rem;
       border-radius: 999px;
       background: linear-gradient(135deg, #25d366, #128c7e);
       color: var(--white);
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       box-shadow: 0 6px 18px rgba(37, 211, 102, 0.3);
       transition: transform 0.2s;
 
@@ -260,16 +302,18 @@ import { IconComponent } from '../shared/icon.component';
       font-size: 1.3rem;
     }
 
-    @media (max-width: 920px) {
+    @media (max-width: 960px) {
       .burger {
         display: grid;
       }
 
-      .order-btn span {
+      .order-btn span,
+      .cart-label {
         display: none;
       }
 
-      .order-btn {
+      .order-btn,
+      .cart-btn {
         padding: 0.55rem;
       }
 
@@ -318,6 +362,7 @@ import { IconComponent } from '../shared/icon.component';
 export class HeaderComponent {
   readonly i18n = inject(I18nService);
   readonly ps = inject(ProductService);
+  readonly cart = inject(CartService);
   readonly menuOpen = signal(false);
   readonly scrolled = signal(false);
 

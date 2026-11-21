@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CartService } from '../core/cart.service';
 import { I18nService } from '../core/i18n.service';
 import { ProductService } from '../core/product.service';
 import { IconComponent } from '../shared/icon.component';
@@ -63,7 +64,7 @@ import { IconComponent } from '../shared/icon.component';
 
           <div class="col contact-col">
             <h3>{{ i18n.t('orderInquiry') }}</h3>
-            <a [href]="'tel:' + ps.contact.phone" class="contact-pill">
+            <a [href]="'tel:' + ps.contact.phoneHref" class="contact-pill">
               <app-icon name="phone" />
               <span dir="ltr">{{ ps.contact.phone }}</span>
             </a>
@@ -79,6 +80,19 @@ import { IconComponent } from '../shared/icon.component';
         </div>
       </div>
     </footer>
+
+    @if (cart.totalCount() > 0) {
+      <button type="button" class="floating-cart" (click)="cart.open()">
+        <span class="fc-icon">
+          <app-icon name="cart" />
+          <b>{{ cart.totalCount() }}</b>
+        </span>
+        <span class="fc-text">
+          <small>{{ i18n.t('cartTitle') }}</small>
+          <strong>{{ i18n.formatPrice(cart.totalPrice()) }}</strong>
+        </span>
+      </button>
+    }
 
     <a [href]="ps.whatsappUrl()" target="_blank" rel="noopener" class="floating-wa" [attr.aria-label]="i18n.t('whatsapp')">
       <app-icon name="whatsapp" />
@@ -244,6 +258,71 @@ import { IconComponent } from '../shared/icon.component';
       color: rgba(255, 255, 255, 0.6);
     }
 
+    .floating-cart {
+      position: fixed;
+      bottom: 1.5rem;
+      inset-inline-start: 1.5rem;
+      z-index: 90;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.65rem 1.15rem 0.65rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(220, 188, 108, 0.45);
+      background: linear-gradient(135deg, var(--purple-900), var(--purple-700));
+      color: var(--white);
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.25s var(--ease);
+
+      &:hover {
+        transform: translateY(-3px);
+      }
+
+      .fc-icon {
+        position: relative;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--gold-400);
+        color: var(--purple-900);
+        display: grid;
+        place-items: center;
+        font-size: 1.25rem;
+
+        b {
+          position: absolute;
+          top: -4px;
+          inset-inline-end: -4px;
+          background: #e11d48;
+          color: var(--white);
+          font-size: 0.7rem;
+          min-width: 19px;
+          height: 19px;
+          border-radius: 999px;
+          display: grid;
+          place-items: center;
+        }
+      }
+
+      .fc-text {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        line-height: 1.15;
+
+        small {
+          font-size: 0.72rem;
+          color: var(--gold-300);
+          font-weight: 700;
+        }
+
+        strong {
+          font-size: 0.95rem;
+          font-weight: 900;
+        }
+      }
+    }
+
     .floating-wa {
       position: fixed;
       bottom: 1.5rem;
@@ -293,5 +372,6 @@ import { IconComponent } from '../shared/icon.component';
 export class FooterComponent {
   readonly i18n = inject(I18nService);
   readonly ps = inject(ProductService);
+  readonly cart = inject(CartService);
   readonly year = new Date().getFullYear();
 }

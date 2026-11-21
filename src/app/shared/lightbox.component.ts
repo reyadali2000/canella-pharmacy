@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { CartService } from '../core/cart.service';
 import { I18nService } from '../core/i18n.service';
 import { ProductService } from '../core/product.service';
 import { IconComponent } from './icon.component';
@@ -34,6 +35,7 @@ import { IconComponent } from './icon.component';
                 @if (p.size) {
                   <span class="size" dir="ltr">{{ p.size }}</span>
                 }
+                <span class="sku" dir="ltr">{{ i18n.t('sku') }}: {{ p.sku }}</span>
                 @if (lb.products.length > 1) {
                   <span class="counter" dir="ltr">{{ lb.index + 1 }} / {{ lb.products.length }}</span>
                 }
@@ -42,12 +44,40 @@ import { IconComponent } from './icon.component';
               <h2>{{ i18n.tr(p.name) }}</h2>
               <p>{{ i18n.tr(p.subtitle) }}</p>
 
+              <div class="price-box">
+                <span>{{ i18n.t('price') }}</span>
+                <strong>{{ i18n.formatPrice(p.price) }}</strong>
+              </div>
+
+              <div class="cart-row">
+                @if (cart.getQty(p.id) === 0) {
+                  <button type="button" class="btn btn-primary full" (click)="cart.add(p, 1)">
+                    <app-icon name="cart" />
+                    <span>{{ i18n.t('addToCart') }}</span>
+                  </button>
+                } @else {
+                  <div class="lb-qty">
+                    <button type="button" (click)="cart.add(p, -1)">
+                      <app-icon name="minus" />
+                    </button>
+                    <span>{{ cart.getQty(p.id) }} {{ i18n.t('inCart') }}</span>
+                    <button type="button" (click)="cart.add(p, 1)">
+                      <app-icon name="plus" />
+                    </button>
+                  </div>
+                  <button type="button" class="btn btn-gold" (click)="openCart()">
+                    <app-icon name="cart" />
+                    <span>{{ i18n.t('cartTitle') }}</span>
+                  </button>
+                }
+              </div>
+
               <div class="cta-row">
                 <a [href]="ps.whatsappUrl(p)" target="_blank" rel="noopener" class="btn btn-whatsapp">
                   <app-icon name="whatsapp" />
                   <span>{{ i18n.t('orderWhatsapp') }}</span>
                 </a>
-                <a [href]="'tel:' + ps.contact.phone" class="btn btn-primary">
+                <a [href]="'tel:' + ps.contact.phoneHref" class="btn btn-call">
                   <app-icon name="phone" />
                   <span dir="ltr">{{ ps.contact.phone }}</span>
                 </a>
@@ -73,13 +103,13 @@ import { IconComponent } from './icon.component';
 
     .dialog {
       position: relative;
-      width: min(1040px, 100%);
+      width: min(1060px, 100%);
       max-height: 92vh;
       background: var(--white);
       border-radius: var(--radius-lg);
       overflow: hidden;
       display: grid;
-      grid-template-columns: 1.25fr 1fr;
+      grid-template-columns: 1.2fr 1fr;
       box-shadow: var(--shadow-lg);
       animation: popIn 0.3s var(--ease);
     }
@@ -100,23 +130,23 @@ import { IconComponent } from './icon.component';
     }
 
     .info {
-      padding: 2.25rem 2rem;
+      padding: 2rem 1.85rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
       overflow-y: auto;
 
       h2 {
-        font-size: 1.45rem;
+        font-size: 1.4rem;
         font-weight: 800;
         color: var(--purple-900);
-        margin: 0.75rem 0;
+        margin: 0.7rem 0 0.45rem;
       }
 
       p {
         color: var(--muted);
-        font-size: 1rem;
-        margin: 0 0 1.75rem;
+        font-size: 0.96rem;
+        margin: 0 0 1.2rem;
       }
     }
 
@@ -124,13 +154,13 @@ import { IconComponent } from './icon.component';
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.45rem;
 
       .cat {
         background: var(--purple-100);
         color: var(--purple-700);
         font-weight: 700;
-        font-size: 0.82rem;
+        font-size: 0.8rem;
         padding: 0.2rem 0.75rem;
         border-radius: 999px;
       }
@@ -139,9 +169,15 @@ import { IconComponent } from './icon.component';
         background: var(--purple-800);
         color: var(--gold-300);
         font-weight: 700;
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         padding: 0.2rem 0.7rem;
         border-radius: 999px;
+      }
+
+      .sku {
+        font-size: 0.78rem;
+        color: var(--muted);
+        font-weight: 700;
       }
 
       .counter {
@@ -152,10 +188,82 @@ import { IconComponent } from './icon.component';
       }
     }
 
+    .price-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1.15rem;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--purple-50), var(--purple-100));
+      border: 1px solid rgba(123, 47, 168, 0.14);
+      margin-bottom: 1.15rem;
+
+      span {
+        font-weight: 700;
+        color: var(--purple-800);
+      }
+
+      strong {
+        font-size: 1.45rem;
+        font-weight: 900;
+        color: var(--purple-900);
+      }
+    }
+
+    .cart-row {
+      display: flex;
+      gap: 0.65rem;
+      margin-bottom: 0.85rem;
+
+      .full {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    .lb-qty {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--purple-100);
+      border-radius: 999px;
+      padding: 0.3rem 0.45rem;
+
+      button {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 0;
+        background: var(--purple-700);
+        color: var(--white);
+        display: grid;
+        place-items: center;
+      }
+
+      span {
+        font-weight: 800;
+        color: var(--purple-900);
+      }
+    }
+
     .cta-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.65rem;
+
+      .btn {
+        flex: 1;
+        justify-content: center;
+        padding: 0.7rem 1.1rem;
+        font-size: 0.92rem;
+      }
+
+      .btn-call {
+        background: var(--purple-50);
+        color: var(--purple-800);
+        border: 1.5px solid var(--purple-100);
+      }
     }
 
     .close-btn {
@@ -237,7 +345,7 @@ import { IconComponent } from './icon.component';
         overflow-y: auto;
       }
       .img-wrap img {
-        max-height: 56vh;
+        max-height: 52vh;
       }
       .info {
         padding: 1.35rem;
@@ -256,11 +364,17 @@ import { IconComponent } from './icon.component';
 export class LightboxComponent {
   readonly i18n = inject(I18nService);
   readonly ps = inject(ProductService);
+  readonly cart = inject(CartService);
 
   readonly current = computed(() => {
     const lb = this.ps.lightbox();
     return lb ? lb.products[lb.index] : null;
   });
+
+  openCart(): void {
+    this.ps.closeLightbox();
+    this.cart.open();
+  }
 
   onKey(e: KeyboardEvent): void {
     if (!this.ps.lightbox()) return;

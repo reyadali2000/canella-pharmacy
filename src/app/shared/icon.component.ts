@@ -25,6 +25,10 @@ const ICONS: Record<string, string> = {
   leaf: '<path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 19c0-9 6-14 15-14 0 9-5 15-14 15m0-1c3-4 6-7 10-10"/>',
   chat: '<path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M4 5h16v11H9l-5 4V5Z"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M8 9.5h8M8 12.5h5"/>',
   sparkle: '<path fill="currentColor" d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2Zm7 13 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z"/>',
+  cart: '<path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M3 4h2l2.2 10.5a1.8 1.8 0 0 0 1.8 1.5h8.2a1.8 1.8 0 0 0 1.8-1.4L21 7H6"/><circle cx="9.5" cy="19.5" r="1.5" fill="currentColor"/><circle cx="17.5" cy="19.5" r="1.5" fill="currentColor"/>',
+  plus: '<path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M12 5v14M5 12h14"/>',
+  minus: '<path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M5 12h14"/>',
+  trash: '<path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M9 7V4h6v3m-8 0 1 13h8l1-13M10 11v6m4-6v6"/>',
   // Category icons
   jar: '<path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M5 9h14v9a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V9Zm-1-5h16v5H4V4Z"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M9 14h6"/>',
   tooth: '<path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 5.5C10 4 6 3.5 5 6.5c-1 3 .5 5.5 1 8 .5 2.8 1 6.5 2.5 6.5S10 16 12 16s2 5 3.5 5 2-3.7 2.5-6.5c.5-2.5 2-5 1-8-1-3-5-2.5-7-1Z"/>',
@@ -50,4 +54,3 @@ export class IconComponent {
   readonly name = input.required<string>();
   readonly svg = computed<SafeHtml>(() => this.sanitizer.bypassSecurityTrustHtml(ICONS[this.name()] ?? ''));
 }
-

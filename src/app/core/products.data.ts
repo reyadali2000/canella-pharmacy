@@ -2,6 +2,8 @@ import { L } from './i18n.service';
 
 export interface Product {
   id: string;
+  sku: string;
+  price: number;
   categorySlug: string;
   image: string;
   name: L;
@@ -30,8 +32,9 @@ export interface SlideItem {
 }
 
 export const CONTACT = {
-  phone: '785666607',
-  whatsappInt: '967785666607',
+  phone: '+967 776 186 317',
+  phoneHref: '+967776186317',
+  whatsappInt: '967776186317',
   instagram: 'https://www.instagram.com/canellamax_co/',
   facebook: 'https://www.facebook.com/share/1FRUbV87WK/?mibextid=wwXIfr',
   tiktok: 'https://www.tiktok.com/@canellamax.yemen',
@@ -120,6 +123,8 @@ export const CATEGORIES: Category[] = [
     products: [
       {
         id: 'sc-1',
+        sku: '11109-06-006',
+        price: 3000,
         categorySlug: 'skin-creams',
         image: 'images/skin-creams/1795207657241.jpg',
         name: { ar: 'كريم كانيلا لعلاج الإكزيما والتهيج الجلدي', en: 'Canella Eczema Relief Skin Repair Cream' },
@@ -132,6 +137,8 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'sc-2',
+        sku: '11109-05-001',
+        price: 4500,
         categorySlug: 'skin-creams',
         image: 'images/skin-creams/1795207657290.jpg',
         name: {
@@ -147,22 +154,27 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'sc-3',
+        sku: '11109-06-007',
+        price: 4000,
         categorySlug: 'skin-creams',
         image: 'images/skin-creams/1795207657303.jpg',
-        name: { ar: 'كريم BB بعامل حماية SPF 30 من كانيلا ماكس', en: 'Canella Max BB Cream SPF 30' },
+        name: { ar: 'بي بي كريم SPF 30 (كريم أساس وخافي عيوب ومغذي)', en: 'Canella Max BB Cream SPF 30' },
         subtitle: {
           ar: 'تغطية خفيفة وتوحيد للون البشرة مع ترطيب وحماية من الشمس للبشرة العادية والدهنية',
           en: 'Light coverage, hydration & UVA/UVB protection for normal to oily skin',
         },
+        size: '50 ml',
         featured: true,
       },
       {
         id: 'sc-4',
+        sku: '11109-05-004',
+        price: 4500,
         categorySlug: 'skin-creams',
         image: 'images/skin-creams/1795207657308.jpg',
         name: {
-          ar: 'واقي شمس كانيلا ماكس SPF 50 بيج فاتح (للبشرة الدهنية والعادية)',
-          en: 'Canella Max Sunscreen Cream SPF 50 – Light Beige (Oily to Normal Skin)',
+          ar: 'واقي شمس كانيلا ماكس SPF 50 بيج فاتح (للبشرة الدهنية والمختلطة)',
+          en: 'Canella Max Sunscreen Cream SPF 50 – Light Beige (Oily & Combination Skin)',
         },
         subtitle: {
           ar: 'واقي شمس مطفي يتحكم بالزيوت واللمعان ويحمي من أشعة UVA/UVB',
@@ -172,10 +184,12 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'sc-5',
+        sku: '11109-05-003',
+        price: 4500,
         categorySlug: 'skin-creams',
         image: 'images/skin-creams/1795207657333.jpg',
         name: {
-          ar: 'واقي شمس كانيلا ماكس SPF 50 بيج فاتح طبيعي (للبشرة الجافة)',
+          ar: 'واقي شمس كانيلا ماكس SPF 50 بيج فاتح (للبشرة الجافة)',
           en: 'Canella Max Sunscreen Cream SPF 50 – Light Beige (Dry Skin)',
         },
         subtitle: {
@@ -186,10 +200,12 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'sc-6',
+        sku: '11109-06-001',
+        price: 3000,
         categorySlug: 'skin-creams',
         image: 'images/skin-creams/1795207657339.jpg',
         name: {
-          ar: 'كريم مرطب لليدين والوجه (للبشرة الدهنية والمختلطة)',
+          ar: 'كريم ترطيب لليدين والوجه (للبشرة الدهنية والمختلطة)',
           en: 'Canella Max Moisturizing Hand & Face Cream (Oily & Combination Skin)',
         },
         subtitle: {
@@ -200,10 +216,12 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'sc-7',
+        sku: '11109-06-003',
+        price: 1000,
         categorySlug: 'skin-creams',
         image: 'images/skin-creams/1795207657381.jpg',
         name: {
-          ar: 'كريم مرطب لليدين والوجه بزيت الجوجوبا',
+          ar: 'كريم ترطيب اليدين والوجه بزيت الجوجوبا',
           en: 'Canella Max Hand & Face Moisturizing Cream – Jojoba Oil',
         },
         subtitle: {
@@ -215,10 +233,12 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'sc-8',
+        sku: '11109-06-001',
+        price: 3000,
         categorySlug: 'skin-creams',
         image: 'images/skin-creams/1795207657386.jpg',
         name: {
-          ar: 'كريم مرطب لليدين والوجه (للبشرة الجافة والحساسة)',
+          ar: 'كريم ترطيب لليدين والوجه (للبشرة الجافة والحساسة)',
           en: 'Canella Max Moisturizing Hand & Face Cream (Dry & Sensitive Skin)',
         },
         subtitle: {
@@ -229,10 +249,12 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'sc-9',
+        sku: '11109-05-004',
+        price: 4500,
         categorySlug: 'skin-creams',
         image: 'images/skin-creams/1795207657397.jpg',
         name: {
-          ar: 'واقي شمس كانيلا ماكس SPF 50 مقاوم للماء (للبشرة الدهنية)',
+          ar: 'واقي شمس كانيلا ماكس SPF 50 مقاوم للماء (بيج فاتح – للبشرة الدهنية)',
           en: 'Canella Max Water-Resistant Sunscreen SPF 50 – Light Beige',
         },
         subtitle: {
@@ -243,10 +265,12 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'sc-10',
+        sku: '11109-06-005',
+        price: 1000,
         categorySlug: 'skin-creams',
         image: 'images/skin-creams/1795207657405.jpg',
         name: {
-          ar: 'كريم مرطب لليدين والوجه بزيت الأفوكادو',
+          ar: 'كريم ترطيب اليدين والوجه بالأفوكادو',
           en: 'Canella Max Hand & Face Moisturizing Cream – Avocado Oil',
         },
         subtitle: {
@@ -257,10 +281,12 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'sc-11',
+        sku: '11109-06-004',
+        price: 1000,
         categorySlug: 'skin-creams',
         image: 'images/skin-creams/1795207657433.jpg',
         name: {
-          ar: 'كريم مرطب لليدين والوجه بزيت الأرغان',
+          ar: 'كريم ترطيب اليدين والوجه بزيت الأرغان',
           en: 'Canella Max Hand & Face Moisturizing Cream – Argan Oil',
         },
         subtitle: {
@@ -271,10 +297,12 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'sc-12',
+        sku: '11109-06-003',
+        price: 1000,
         categorySlug: 'skin-creams',
         image: 'images/skin-creams/1795207657514.jpg',
         name: {
-          ar: 'كريم كانيلا ماكس بزيت الجوجوبا – عناية متكاملة',
+          ar: 'كريم ترطيب اليدين والوجه بزيت الجوجوبا – عناية متكاملة',
           en: 'Canella Max Jojoba Oil Moisturizing Cream – Complete Care',
         },
         subtitle: {
@@ -285,10 +313,12 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'sc-13',
+        sku: '11109-06-003',
+        price: 1000,
         categorySlug: 'skin-creams',
         image: 'images/skin-creams/1795207657526.jpg',
         name: {
-          ar: 'كريم كانيلا ماكس بزيت الجوجوبا السريع الامتصاص',
+          ar: 'كريم ترطيب اليدين والوجه بزيت الجوجوبا السريع الامتصاص',
           en: 'Canella Max Fast-Absorbing Jojoba Moisturizing Cream',
         },
         subtitle: {
@@ -299,10 +329,12 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'sc-14',
+        sku: '11109-06-002',
+        price: 1000,
         categorySlug: 'skin-creams',
         image: 'images/skin-creams/1795207657549.jpg',
         name: {
-          ar: 'كريم مرطب لليدين والوجه بخلاصة الصبار (الألوفيرا)',
+          ar: 'كريم ترطيب اليدين والوجه بالألوفيرا (صبار)',
           en: 'Canella Max Hand & Face Moisturizing Cream – Aloe Vera',
         },
         subtitle: {
@@ -313,10 +345,12 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'sc-15',
+        sku: '11109-06-004',
+        price: 1000,
         categorySlug: 'skin-creams',
         image: 'images/skin-creams/1795207657557.jpg',
         name: {
-          ar: 'كريم كانيلا ماكس بزيت الأرغان المغربي الفاخر',
+          ar: 'كريم ترطيب اليدين والوجه بزيت الأرغان المغربي',
           en: 'Canella Max Luxury Argan Oil Hand & Face Cream',
         },
         subtitle: {
@@ -340,9 +374,11 @@ export const CATEGORIES: Category[] = [
     products: [
       {
         id: 'tp-1',
+        sku: '11109-07-002',
+        price: 1500,
         categorySlug: 'toothpaste',
         image: 'images/toothpaste/1795207657344.jpg',
-        name: { ar: 'معجون أسنان كانيلا ماكس بالفحم النشط', en: 'Canella Max Activated Charcoal Toothpaste' },
+        name: { ar: 'معجون أسنان بالفحم النشط 100 جم', en: 'Canella Max Activated Charcoal Toothpaste' },
         subtitle: {
           ar: 'فحم نشط لتنظيف عميق وتبييض طبيعي ومكافحة البلاك ونفس منعش',
           en: 'Activated charcoal for deep cleaning, natural whitening, anti-plaque & fresh breath',
@@ -352,96 +388,117 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'tp-2',
+        sku: '11109-07-005',
+        price: 1800,
         categorySlug: 'toothpaste',
         image: 'images/toothpaste/1795207657263.jpg',
-        name: { ar: 'معجون أسنان كانيلا ماكس لتبييض الأسنان', en: 'Canella Max Whitening Toothpaste' },
+        name: { ar: 'معجون أسنان مبيض (تبييض مكثف) 100 جم', en: 'Canella Max Intensive Whitening Toothpaste' },
         subtitle: {
           ar: 'يبيض الأسنان ويزيل التصبغات والبقع ويمنع الجير بخلاصة النعناع المنعش',
           en: 'Whitens teeth, removes stains & fights plaque with refreshing mint extract',
         },
+        size: '100 g',
         featured: true,
       },
       {
         id: 'tp-3',
+        sku: '11109-07-004',
+        price: 2000,
         categorySlug: 'toothpaste',
         image: 'images/toothpaste/1795207657375.jpg',
-        name: { ar: 'معجون أسنان كانيلا ماكس للأسنان الحساسة', en: 'Canella Max Sensitive Toothpaste' },
+        name: { ar: 'معجون أسنان للأسنان الحساسة وتبييضها 100 جم', en: 'Canella Max Sensitive & Whitening Toothpaste' },
         subtitle: {
           ar: 'يخفف حساسية الأسنان ويحمي اللثة ويكافح التسوس بنكهة النعناع',
           en: 'Relieves tooth sensitivity, protects gums & prevents cavities with fresh mint',
         },
+        size: '100 g',
       },
       {
         id: 'tp-4',
+        sku: '11109-07-001',
+        price: 1500,
         categorySlug: 'toothpaste',
         image: 'images/toothpaste/1795207657274.jpg',
         name: {
-          ar: 'معجون أسنان كانيلا ماكس العشبي (أوراق البابايا والجوافة)',
-          en: 'Canella Max Herbal Toothpaste (Papaya & Guava Leaf Extract)',
+          ar: 'معجون أسنان عشبي لإنعاش النفس (أوراق البابايا والجوافة)',
+          en: 'Canella Max Herbal Fresh Breath Toothpaste (Papaya & Guava Leaf)',
         },
         subtitle: {
           ar: 'تركيبة عشبية طبيعية لعناية كاملة بالأسنان واللثة ومقاومة البلاك',
           en: 'Natural herbal formula for complete teeth and gum care & anti-plaque protection',
         },
+        size: '100 g',
       },
       {
         id: 'tp-5',
+        sku: '11109-07-003',
+        price: 1800,
         categorySlug: 'toothpaste',
         image: 'images/toothpaste/1795207657351.jpg',
         name: {
-          ar: 'معجون أسنان كانيلا ماكس للعدسات والحشوات التجميلية',
-          en: 'Canella Max Dental Veneer & Composite Toothpaste',
+          ar: 'معجون أسنان خاص بالفينير والحشوات وأصحاب التقويم',
+          en: 'Canella Max Dental Veneer, Composite & Orthodontics Toothpaste',
         },
         subtitle: {
           ar: 'خالٍ من SLS والمواد الكاشطة، آمن على الفينير والحشوات بنكهة الأناناس والنعناع',
           en: 'SLS-free, non-abrasive care for veneers & composite fillings with pineapple-mint flavor',
         },
+        size: '100 g',
       },
       {
         id: 'tp-6',
+        sku: '11109-07-006',
+        price: 1500,
         categorySlug: 'toothpaste',
         image: 'images/toothpaste/1795207657446.jpg',
-        name: { ar: 'معجون أسنان كانيلا ماكس للعناية اليومية', en: 'Canella Max Daily Care Toothpaste' },
+        name: { ar: 'معجون أسنان للعناية اليومية خالي من الفلورايد', en: 'Canella Max Fluoride-Free Daily Care Toothpaste' },
         subtitle: {
           ar: 'عناية يومية متكاملة للأسنان واللثة خالية من الفلورايد بمستخلصات طبيعية',
           en: 'Fluoride-free daily protection for healthy gums and teeth with natural extracts',
         },
+        size: '100 g',
       },
       {
         id: 'tp-7',
+        sku: '11109-07-007',
+        price: 500,
         categorySlug: 'toothpaste',
         image: 'images/toothpaste/1795207657247.jpg',
-        name: { ar: 'معجون أسنان كانيلا ماكس للأطفال بنكهة الموز', en: 'Canella Max Kids Toothpaste – Banana' },
+        name: { ar: 'معجون أسنان للأطفال بنكهة الموز', en: 'Canella Max Kids Toothpaste – Banana' },
         subtitle: {
           ar: 'خالٍ من الفلورايد و SLS، آمن عند البلع، مخصص للأطفال من 2 إلى 6 سنوات',
           en: 'Fluoride-free & SLS-free kids toothpaste, safe if swallowed, ages 2–6',
         },
-        size: '60 ml',
+        size: '60 g',
       },
       {
         id: 'tp-8',
+        sku: '11109-07-007',
+        price: 500,
         categorySlug: 'toothpaste',
         image: 'images/toothpaste/1795207657415.jpg',
-        name: { ar: 'معجون أسنان كانيلا ماكس للأطفال بنكهة الفراولة', en: 'Canella Max Kids Toothpaste – Strawberry' },
+        name: { ar: 'معجون أسنان للأطفال بنكهة الفراولة', en: 'Canella Max Kids Toothpaste – Strawberry' },
         subtitle: {
           ar: 'بطعم الفراولة الطبيعي، خالٍ من الفلورايد و SLS وآمن للأطفال من 2 إلى 6 سنوات',
           en: 'Natural strawberry kids toothpaste, fluoride & SLS free, safe if swallowed, ages 2–6',
         },
-        size: '60 ml',
+        size: '60 g',
       },
       {
         id: 'tp-9',
+        sku: '11109-07-007',
+        price: 1000,
         categorySlug: 'toothpaste',
         image: 'images/toothpaste/1795207657328.jpg',
         name: {
-          ar: 'مجموعة معجون أسنان الأطفال (فراولة وموز)',
-          en: 'Canella Max Kids Toothpaste Duo (Strawberry & Banana)',
+          ar: 'مجموعة معجون أسنان الأطفال (عبوتان: فراولة + موز)',
+          en: 'Canella Max Kids Toothpaste Duo (2 pcs: Strawberry & Banana)',
         },
         subtitle: {
           ar: 'ثنائي نكهات الفواكه الطبيعية المحببة للأطفال، خالٍ من الفلورايد و SLS',
           en: 'Kids toothpaste duo with natural fruit flavors, fluoride-free & SLS-free',
         },
-        size: '60 ml',
+        size: '2 × 60 g',
       },
     ],
   },
@@ -458,65 +515,75 @@ export const CATEGORIES: Category[] = [
     products: [
       {
         id: 'sh-1',
+        sku: '11109-01-003',
+        price: 1200,
         categorySlug: 'shampoo',
         image: 'images/shampoo/1795207657252.jpg',
         name: {
-          ar: 'شامبو القرفة والشاي الأخضر من كانيلا ماكس',
+          ar: 'شامبو القرفة والشاي الأخضر منوع',
           en: 'Canella Max Cinnamon & Green Tea Shampoo',
         },
         subtitle: {
           ar: 'تغذية طبيعية وتقوية للشعر ودعم لصحة فروة الرأس – متوفر للشعر العادي والجاف',
           en: 'Natural nourishment & antioxidant care for normal and dry hair',
         },
-        size: '330 ml',
+        size: '330 g',
         featured: true,
       },
       {
         id: 'sh-2',
+        sku: '11109-01-001',
+        price: 900,
         categorySlug: 'shampoo',
         image: 'images/shampoo/1795207657295.jpg',
         name: {
-          ar: 'شامبو جنين القمح لتغذية وإصلاح الشعر',
+          ar: 'شامبو جنين القمح منوع لتغذية وإصلاح الشعر',
           en: 'Canella Max Wheat Germ Repair & Nourish Shampoo',
         },
         subtitle: {
           ar: 'غني بالبروتينات وفيتامينات E و B وأوميغا 3 لإصلاح الشعر الضعيف وتقليل التساقط',
           en: 'Rich in proteins, Vitamins E & B and Omega-3 to repair weak hair & reduce hair fall',
         },
-        size: '230 ml',
+        size: '220 g',
         featured: true,
       },
       {
         id: 'sh-3',
+        sku: '11109-01-002',
+        price: 900,
         categorySlug: 'shampoo',
         image: 'images/shampoo/1795207657316.jpg',
         name: {
-          ar: 'شامبو كانيلا ماكس العشبي المضاد للقشرة بزيت شجرة الشاي',
+          ar: 'شامبو عشبي مضاد للقشرة بزيت شجرة الشاي',
           en: 'Canella Max Herbal Anti-Dandruff Shampoo with Tea Tree Oil',
         },
         subtitle: {
           ar: 'يزيل القشرة بفعالية ويهدئ الحكة والالتهابات ويوازن إفراز الدهون في فروة الرأس',
           en: 'Eliminates dandruff, soothes scalp itching & controls excess oil for all hair types',
         },
-        size: '220 ml',
+        size: '220 g',
         featured: true,
       },
       {
         id: 'sh-4',
+        sku: '11109-01-001',
+        price: 900,
         categorySlug: 'shampoo',
         image: 'images/shampoo/1795207657323.jpg',
         name: {
-          ar: 'تشكيلة شامبو جنين القمح (للشعر الجاف والعادي والدهني)',
-          en: 'Canella Max Wheat Germ Shampoo Range (Dry, Normal & Greasy Hair)',
+          ar: 'شامبو جنين القمح (للشعر الجاف والعادي والدهني)',
+          en: 'Canella Max Wheat Germ Shampoo (Dry, Normal & Greasy Hair)',
         },
         subtitle: {
           ar: 'تركيبات مخصصة لكل نوع شعر بخلاصة جنين القمح الطبيعي والكيراتين',
           en: 'Tailored formulas for dry, normal and oily hair with natural Wheat Germ extract',
         },
-        size: '230 ml',
+        size: '220 g',
       },
       {
         id: 'sh-5',
+        sku: '11109-01-003',
+        price: 1200,
         categorySlug: 'shampoo',
         image: 'images/shampoo/1795207657473.jpg',
         name: {
@@ -527,21 +594,23 @@ export const CATEGORIES: Category[] = [
           ar: 'تنظيف لطيف وترطيب متوازن يحمي الشعر من التقصف والعوامل الضارة',
           en: 'Gentle cleansing & balanced moisture that protects hair from split ends',
         },
-        size: '330 ml',
+        size: '330 g',
       },
       {
         id: 'sh-6',
+        sku: '11109-01-002',
+        price: 900,
         categorySlug: 'shampoo',
         image: 'images/shampoo/1795207657486.jpg',
         name: {
-          ar: 'شامبو مضاد للقشرة بزيت شجرة الشاي والصبار والقمح',
+          ar: 'شامبو عشبي مضاد للقشرة بزيت شجرة الشاي والصبار',
           en: 'Canella Max Tea Tree, Aloe & Wheat Anti-Dandruff Shampoo',
         },
         subtitle: {
           ar: 'مضاد للبكتيريا والفطريات، يقوي الجذور ويمنح فروة الرأس نظافة وانتعاشاً يدوم',
           en: 'Antibacterial & antifungal formula that strengthens roots and refreshes the scalp',
         },
-        size: '220 ml',
+        size: '220 g',
       },
     ],
   },
@@ -558,10 +627,12 @@ export const CATEGORIES: Category[] = [
     products: [
       {
         id: 'fm-1',
+        sku: '11109-03-001',
+        price: 2000,
         categorySlug: 'face-masks',
         image: 'images/face-masks/1795207657269.jpg',
         name: {
-          ar: 'قناع الفحم الأسود المقشر من كانيلا ماكس',
+          ar: 'القناع الأسود المقشر بالفحم الطبيعي',
           en: 'Canella Max Black Peel-Off Mask with Natural Charcoal',
         },
         subtitle: {
@@ -573,25 +644,29 @@ export const CATEGORIES: Category[] = [
       },
       {
         id: 'fm-2',
+        sku: '11109-03-002',
+        price: 5000,
         categorySlug: 'face-masks',
         image: 'images/face-masks/1795207657282.jpg',
         name: {
-          ar: 'قناع الطين المنظف بخلاصة الرمان وفيتامين E',
+          ar: 'قناع الطين لإزالة السموم وتنقية البشرة بالرمان وفيتامين E',
           en: 'Canella Max Cleansing Clay Detox Mask – Pomegranate & Vitamin E',
         },
         subtitle: {
           ar: 'قناع طين ديتوكس لتنظيف عميق والتحكم بالدهون، خالٍ من الكبريتات والبارابين',
           en: 'Clay detox mask for deep cleansing & oil control, sulfate and paraben free',
         },
-        size: '6 pcs',
+        size: '150 g',
         featured: true,
       },
       {
         id: 'fm-3',
+        sku: '11109-03-001',
+        price: 2000,
         categorySlug: 'face-masks',
         image: 'images/face-masks/1795207657358.jpg',
         name: {
-          ar: 'قناع الفحم الأسود والطين المقشر لجميع أنواع البشرة',
+          ar: 'القناع الأسود المقشر بالفحم والطين لجميع أنواع البشرة',
           en: 'Canella Max Charcoal & Clay Black Peel-Off Mask',
         },
         subtitle: {
@@ -615,17 +690,19 @@ export const CATEGORIES: Category[] = [
     products: [
       {
         id: 'hc-1',
+        sku: '11109-01-005',
+        price: 2500,
         categorySlug: 'hair-conditioner',
         image: 'images/hair-conditioner/1795207657563.jpg',
         name: {
-          ar: 'بلسم الشعر الحريري بخلاصة ماء الورد (Silky Smooth)',
+          ar: 'بلسم الشعر بماء الورد (Silky Smooth)',
           en: 'Canella Max Silky Smooth Hair Conditioner – Rose Water',
         },
         subtitle: {
           ar: 'خالٍ من الكبريتات والبارابين، يرطب بعمق ويفك التشابك ويعالج الشعر الجاف والمتقصف',
           en: 'Sulfate & paraben free conditioner for dry, damaged & frizzy hair with Rose Water',
         },
-        size: '230 ml',
+        size: '200 g',
         featured: true,
       },
     ],
@@ -634,7 +711,7 @@ export const CATEGORIES: Category[] = [
     slug: 'body-wash',
     name: { ar: 'شامبو جسم', en: 'Body Wash' },
     description: {
-      ar: 'شامبو استحمام للجسم برائحة اللافندر ومستخلصات البابونج والصبار والأوكالبتوس والشاي الأخضر',
+      ar: 'غسول استحمام عشبي للجسم برائحة اللافندر ومستخلصات البابونج والصبار والأوكالبتوس والشاي الأخضر',
       en: 'Herbal Lavender Body Wash with Chamomile, Aloe Vera, Eucalyptus & Green Tea extracts',
     },
     icon: 'pump',
@@ -643,17 +720,19 @@ export const CATEGORIES: Category[] = [
     products: [
       {
         id: 'bw-1',
+        sku: '11109-01-004',
+        price: 1200,
         categorySlug: 'body-wash',
         image: 'images/body-wash/1795207657363.jpg',
         name: {
-          ar: 'شامبو الجسم العشبي برائحة اللافندر من كانيلا ماكس',
+          ar: 'غسول جسم عشبي باللافندر من كانيلا ماكس',
           en: 'Canella Max Herbal Lavender Body Wash',
         },
         subtitle: {
           ar: 'تنظيف لطيف وترطيب عميق وانتعاش يدوم بخلاصة اللافندر والبابونج والصبار والشاي الأخضر',
           en: 'Gentle cleansing & lasting freshness with Lavender, Chamomile, Aloe Vera & Eucalyptus',
         },
-        size: '330 ml',
+        size: '330 g',
         featured: true,
       },
     ],
@@ -662,7 +741,7 @@ export const CATEGORIES: Category[] = [
     slug: 'face-wash',
     name: { ar: 'غسول وجه', en: 'Face Wash' },
     description: {
-      ar: 'غسول رغوي للوجه بفرشاة سيليكون مدمجة وزيت شجرة الشاي والصبار وفيتامين C للبشرة الدهنية والمختلطة',
+      ar: 'رغوة منظفة للوجه بفرشاة سيليكون مدمجة وزيت شجرة الشاي والصبار وفيتامين C للبشرة الدهنية والمختلطة',
       en: 'Foaming Facial Cleanser with built-in brush, Tea Tree Oil, Aloe Vera & Vitamin C',
     },
     icon: 'tube',
@@ -671,17 +750,19 @@ export const CATEGORIES: Category[] = [
     products: [
       {
         id: 'fw-1',
+        sku: '11109-02-002',
+        price: 2500,
         categorySlug: 'face-wash',
         image: 'images/face-wash/1795207657461.jpg',
         name: {
-          ar: 'غسول رغوي للوجه بزيت شجرة الشاي والصبار وفيتامين C',
-          en: 'Canella Max Foaming Facial Cleanser – Tea Tree Oil & Vitamin C',
+          ar: 'رغوة منظفة للوجه للبشرة الدهنية والمختلطة',
+          en: 'Canella Max Foaming Facial Cleanser – Oily & Combination Skin',
         },
         subtitle: {
-          ar: 'ينظف المسام بعمق ويمنع حب الشباب ويوازن الزيوت للبشرة الدهنية والمختلطة – خالٍ من الصابون والبارابين',
-          en: 'Deep pore cleansing for oily & combination skin; soap-free and paraben-free',
+          ar: 'ينظف المسام بعمق ويمنع حب الشباب ويوازن الزيوت بزيت شجرة الشاي والصبار وفيتامين C',
+          en: 'Deep pore cleansing for oily & combination skin with Tea Tree Oil, Aloe Vera & Vitamin C',
         },
-        size: '200 ml',
+        size: '150 ml',
         featured: true,
       },
     ],
@@ -690,7 +771,7 @@ export const CATEGORIES: Category[] = [
     slug: 'foot-cream',
     name: { ar: 'كريم علاج تشقق الأقدام', en: 'Foot Crack Repair Cream' },
     description: {
-      ar: 'كريم فعّال لإزالة تشققات القدمين وترطيبها بعمق بزيت الأرغان وشمع العسل وزبدة الشيا وحمض اللاكتيك',
+      ar: 'كريم العناية بالقدمين لإزالة تشققات الكعبين وترطيبها بعمق بزيت الأرغان وشمع العسل وزبدة الشيا',
       en: 'Deep repair cracked heel cream with Argan Oil, Beeswax, Shea Butter & Lactic Acid',
     },
     icon: 'foot',
@@ -699,11 +780,13 @@ export const CATEGORIES: Category[] = [
     products: [
       {
         id: 'fc-1',
+        sku: '11109-04-001',
+        price: 2000,
         categorySlug: 'foot-cream',
         image: 'images/foot-cream/1795207657368.jpg',
         name: {
-          ar: 'كريم كانيلا ماكس لعلاج تشققات القدمين (Foot Cream Cracked Heel)',
-          en: 'Canella Max Cracked Heel Foot Repair Cream',
+          ar: 'كريم العناية بالقدمين وعلاج التشققات',
+          en: 'Canella Max Cracked Heel Foot Care Cream',
         },
         subtitle: {
           ar: 'يزيل التشققات ويقشر الجلد الميت ويرطب بعمق بزيت الأرغان وشمع العسل وزبدة الشيا – مناسب لمرضى السكري',
